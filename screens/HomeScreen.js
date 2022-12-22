@@ -1,6 +1,6 @@
 //react-native
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 //components
 import { Configuration, OpenAIApi } from "openai";
@@ -18,6 +18,9 @@ const HomeScreen = (props) => {
   const [text, onChangeText] = React.useState(
     "Write your text describing the image here."
   );
+  const [imageUrl, setImageUrl] = React.useState(
+    ""
+  );
   const generateImage = async () => {
     try {
       const res = await openai.createImage({
@@ -25,11 +28,23 @@ const HomeScreen = (props) => {
         n: 1,
         size: "512x512",
       });
+      setImageUrl(res.data.data[0].url);
       console.log(res.data.data[0].url);
     } catch (error) {
       console.error(error);
     }
   };
+
+  const renderImage = ()  => {
+    if (imageUrl.length > 0) return (    
+      <Image
+        style={{width:300, height: 300}}
+        source={{
+          uri: imageUrl,
+        }}
+      />
+    )
+  }
 
   return (
     <View style={styles.screen}>
@@ -37,6 +52,7 @@ const HomeScreen = (props) => {
       <Button icon="camera" mode="contained" onPress={generateImage}>
         Generate Image
       </Button>
+      {renderImage()}
     </View>
   );
 };
