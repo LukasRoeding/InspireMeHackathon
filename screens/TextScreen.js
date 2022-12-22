@@ -122,7 +122,7 @@ const TextScreen = (props) => {
   return (
     <ScrollView style={{}}>
       <View style={styles.screen}>
-      {activityIndicator()}
+        {activityIndicator()}
         <TextInput onChangeText={setquestionText} value={questionText} />
         <Button icon="camera" mode="contained" onPress={generateText}>
           Generate Text
@@ -131,6 +131,7 @@ const TextScreen = (props) => {
         {renderImageButton()}
         {renderImage()}
         <View style={{justifyContent:"center", alignItems:"center"}}>{renderImages()}</View>
+        {activityIndicator()}
       </View>
     </ScrollView>
   );
