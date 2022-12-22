@@ -1,13 +1,16 @@
+import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { Configuration, OpenAIApi } from "openai";
-import MainNavigator from "./navigation/Navigatior";
+import { useState } from "react";
+import { Button, TextInput } from "react-native";
+import "react-native-url-polyfill/auto";
+import MainNavigator from "./navigation/navigation";
+import { NavigationContainer } from "@react-navigation/native";
 import {
   MD3LightTheme as DefaultTheme,
   Provider as PaperProvider,
 } from "react-native-paper";
-import { Button } from "react-native";
-import "react-native-url-polyfill/auto";
 
 export default function App() {
   const theme = {
@@ -18,14 +21,17 @@ export default function App() {
       secondary: "yellow",
     },
   };
+  const [text, onChangeText] = React.useState(
+    "Write your text describing the image here."
+  );
   const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: "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",
   });
   const openai = new OpenAIApi(configuration);
   const generateImage = async () => {
     try {
       const res = await openai.createImage({
-        prompt: "Logo for an app with the name Inspire Me",
+        prompt: text,
         n: 1,
         size: "512x512",
       });
@@ -35,15 +41,16 @@ export default function App() {
     }
   };
   return (
-    <PaperProvider theme={theme}>
-      <View style={styles.container}>
-        {/* <Text>{JSON.stringify(configuration)}</Text>
-        <Text>Hallo</Text> */}
-        <MainNavigator />
-        <StatusBar style="auto" />
-        {/* <Button title="create Image" onPress={generateImage} /> */}
-      </View>
-    </PaperProvider>
+    <NavigationContainer>
+      <PaperProvider theme={theme}>
+        <View style={styles.container}>
+          <MainNavigator />
+          <TextInput onChangeText={onChangeText} value={text} />
+          <Button title="create Image" onPress={generateImage} />
+          <StatusBar style="auto" />
+        </View>
+      </PaperProvider>
+    </NavigationContainer>
   );
 }
 
