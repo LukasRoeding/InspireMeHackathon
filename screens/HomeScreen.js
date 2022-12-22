@@ -31,7 +31,7 @@ const HomeScreen = (props) => {
       const res = await openai.createImage({
         prompt: text,
         n: 1,
-        size: "512x512",
+        size: "1024x1024",
       });
       setImageUrl(res.data.data[0].url);
       setLoading(false)
