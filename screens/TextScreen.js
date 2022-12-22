@@ -167,19 +167,23 @@ const TextScreen = (props) => {
           >
             Generate Text
           </Button>
-          <Text
-            style={{
-              paddingTop: 0,
-              margin: 20,
-              backgroundColor: "white",
-              padding: 20,
-              borderRadius: 10,
-              borderWidth: 1,
-              borderColor: colors.buttonColor,
-            }}
-          >
-            {responseText}
-          </Text>
+          {responseText ? (
+            <Text
+              style={{
+                paddingTop: 0,
+                margin: 20,
+                backgroundColor: "white",
+                padding: 20,
+                borderRadius: 10,
+                borderWidth: 1,
+                borderColor: colors.buttonColor,
+              }}
+            >
+              {responseText}
+            </Text>
+          ) : (
+            <></>
+          )}
           {renderImageButton()}
           {renderImage()}
           <View style={{ justifyContent: "center", alignItems: "center" }}>
