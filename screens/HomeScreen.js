@@ -1,6 +1,12 @@
 //react-native
 import React from "react";
-import { ScrollView, StyleSheet, Image, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Image,
+  View,
+  ActivityIndicator,
+} from "react-native";
 import { TextInput, Button } from "react-native-paper";
 //components
 import { Configuration, OpenAIApi } from "openai";
@@ -16,6 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const HomeScreen = (props) => {
+  const [loading, setLoading] = React.useState(false);
   const dispatch = useDispatch();
   const theme = useTheme();
   const styles = makeStyles();
@@ -29,14 +36,15 @@ const HomeScreen = (props) => {
   const [imageUrl, setImageUrl] = React.useState("");
   const generateImage = async () => {
     try {
+      setLoading(true);
       const res = await openai.createImage({
         prompt: text,
         n: 1,
-        size: "512x512",
+        size: "1024x1024",
       });
       setImageUrl(res.data.data[0].url);
       dispatch(imageAdded({ image_url: res.data.data[0].url }));
-      console.log(res.data.data[0].url);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -56,8 +64,14 @@ const HomeScreen = (props) => {
       );
   };
 
+  const activityIndicator = () => {
+    if (loading == true)
+      return <ActivityIndicator size="large" color="#00ff00" />;
+  };
+
   return (
     <SafeAreaView style={styles.screen}>
+      {activityIndicator()}
       <View style={styles.screenContainer}>
         <TextInput
           style={{ marginBottom: 10 }}
