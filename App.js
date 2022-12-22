@@ -8,6 +8,7 @@ import {
   MD3LightTheme as DefaultTheme,
   Provider as PaperProvider,
 } from "react-native-paper";
+import { x } from "./api-token";
 
 export default function App() {
   const theme = {
