@@ -16,7 +16,7 @@ import colors from "../constants/colors";
 import { useTheme } from "react-native-paper";
 import ImageHistory from "../components/ImageHistory";
 //store
-import { imageAdded } from "../store/images";
+import { addImage } from "../store/images";
 import { persistor } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -35,6 +35,7 @@ const HomeScreen = (props) => {
 
   const [text, onChangeText] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
+  const [images, setImages] = React.useState([]);
   const generateImage = async () => {
     try {
       setLoading(true);
@@ -44,7 +45,8 @@ const HomeScreen = (props) => {
         size: "1024x1024",
       });
       setImageUrl(res.data.data[0].url);
-      dispatch(imageAdded({ image_url: res.data.data[0].url }));
+      //if (imageUrl) dispatch(addImage(imageUrl));
+      if (imageUrl) setImages((old) => [...old, imageUrl]);
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -98,7 +100,7 @@ const HomeScreen = (props) => {
         {activityIndicator()}
         {renderImage()}
       </View>
-      <ImageHistory />
+      <ImageHistory images={images} />
     </SafeAreaView>
   );
 };
