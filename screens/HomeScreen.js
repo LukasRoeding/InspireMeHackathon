@@ -6,10 +6,13 @@ import { TextInput, Button } from "react-native-paper";
 import { Configuration, OpenAIApi } from "openai";
 import { Text } from "react-native-paper";
 import { x } from "../api-token";
+import colors from "../constants/colors";
+import { useTheme } from "react-native-paper";
 
 const HomeScreen = (props) => {
+  const theme = useTheme();
   const styles = makeStyles();
-  console.log(x)
+  console.log(x);
   const configuration = new Configuration({
     apiKey: x,
   });
@@ -18,9 +21,7 @@ const HomeScreen = (props) => {
   const [text, onChangeText] = React.useState(
     "Write your text describing the image here."
   );
-  const [imageUrl, setImageUrl] = React.useState(
-    ""
-  );
+  const [imageUrl, setImageUrl] = React.useState("");
   const generateImage = async () => {
     try {
       const res = await openai.createImage({
@@ -35,16 +36,17 @@ const HomeScreen = (props) => {
     }
   };
 
-  const renderImage = ()  => {
-    if (imageUrl.length > 0) return (    
-      <Image
-        style={{width:300, height: 300}}
-        source={{
-          uri: imageUrl,
-        }}
-      />
-    )
-  }
+  const renderImage = () => {
+    if (imageUrl.length > 0)
+      return (
+        <Image
+          style={{ width: 300, height: 300 }}
+          source={{
+            uri: imageUrl,
+          }}
+        />
+      );
+  };
 
   return (
     <View style={styles.screen}>
@@ -61,9 +63,9 @@ const makeStyles = () =>
   StyleSheet.create({
     screen: {
       flex: 1,
-      backgroundColor: "green",
       alignItems: "center",
       justifyContent: "center",
+      backgroundColor: colors.backgroundColor,
     },
   });
 

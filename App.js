@@ -8,14 +8,15 @@ import {
   MD3LightTheme as DefaultTheme,
   Provider as PaperProvider,
 } from "react-native-paper";
+import colors from "./constants/colors";
 
 export default function App() {
   const theme = {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      primary: "tomato",
-      secondary: "yellow",
+      primary: colors.primaryColor,
+      secondary: colors.secondaryColor,
     },
   };
   return (
@@ -31,7 +32,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: colors.backgroundColor,
     // alignItems: "center",
     // justifyContent: "center",
   },
