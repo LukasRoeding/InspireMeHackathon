@@ -1,7 +1,7 @@
 //react-native
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { Button, TextInput } from "react-native";
+import { TextInput, Button } from "react-native-paper";
 //components
 import { Configuration, OpenAIApi } from "openai";
 import { Text } from "react-native-paper";
@@ -32,7 +32,9 @@ const HomeScreen = (props) => {
   return (
     <View style={styles.screen}>
       <TextInput onChangeText={onChangeText} value={text} />
-      <Button title="create Image" onPress={generateImage} />
+      <Button icon="camera" mode="contained" onPress={generateImage}>
+        Generate Image
+      </Button>
     </View>
   );
 };
