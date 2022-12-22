@@ -11,6 +11,7 @@ import {
   MD3LightTheme as DefaultTheme,
   Provider as PaperProvider,
 } from "react-native-paper";
+import { x } from "./api-token";
 
 
 export default function App() {
@@ -24,11 +25,12 @@ export default function App() {
   };
   const [text, onChangeText] = React.useState("Write your text describing the image here.");
   const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: Config.API_TOKEN,
   });
   const openai = new OpenAIApi(configuration);
   const generateImage = async () => {
     try {
+      console.log(Config)
       const res = await openai.createImage({
         prompt: text,
         n: 1,
