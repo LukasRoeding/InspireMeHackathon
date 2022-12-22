@@ -2,7 +2,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../screens/HomeScreen";
 import SettingScreen from "../screens/SettingScreen";
-import ImageScreen from "../screens/ImageScreen";
+import TextScreen from "../screens/TextScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -13,20 +13,20 @@ const MainNavigator = () => {
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen
-          name="Texts"
+          name="Images"
           options={{
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="text" color={color} size={26} />
+              <MaterialCommunityIcons name="image" color={color} size={26} />
             ),
           }}
           component={HomeScreen}
         />
         <Tab.Screen
-          name="Images"
-          component={ImageScreen}
+          name="Texts"
+          component={TextScreen}
           options={{
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="image" color={color} size={26} />
+              <MaterialCommunityIcons name="text" color={color} size={26} />
             ),
           }}
         />

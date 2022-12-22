@@ -3,7 +3,7 @@ import { View, StyleSheet } from "react-native";
 //components
 import { Text } from "react-native-paper";
 
-const ImageScreen = (props) => {
+const TextScreen = (props) => {
   const styles = makeStyles();
 
   return (
@@ -20,4 +20,4 @@ const makeStyles = () =>
     },
   });
 
-export default ImageScreen;
+export default TextScreen;
