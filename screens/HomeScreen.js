@@ -5,11 +5,13 @@ import { Button, TextInput } from "react-native";
 //components
 import { Configuration, OpenAIApi } from "openai";
 import { Text } from "react-native-paper";
+import { x } from "../api-token";
 
 const HomeScreen = (props) => {
   const styles = makeStyles();
+  console.log(x)
   const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: x,
   });
   const openai = new OpenAIApi(configuration);
 
