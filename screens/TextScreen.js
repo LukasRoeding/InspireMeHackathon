@@ -15,12 +15,8 @@ const TextScreen = (props) => {
   });
   const openai = new OpenAIApi(configuration);
   const [loading, setLoading] = React.useState(false);
-  const [questionText, setquestionText] = React.useState(
-    "What do you want?"
-  );
-  const [responseText, setResponseText] = React.useState(
-    ""
-  );
+  const [questionText, setquestionText] = React.useState("");
+  const [responseText, setResponseText] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
   const [images, setImages] = React.useState([]);
   const generateText = async () => {
@@ -31,8 +27,8 @@ const TextScreen = (props) => {
         prompt: questionText,
         max_tokens: 500,
         temperature: 0,
-      })
-      setResponseText(res.data.choices[0].text)
+      });
+      setResponseText(res.data.choices[0].text);
     } catch (error) {
       console.error(error);
     }
@@ -83,7 +79,6 @@ const TextScreen = (props) => {
         </View>
       );
   };
-
 
   const renderImage = () => {
     if (imageUrl.length > 0)
