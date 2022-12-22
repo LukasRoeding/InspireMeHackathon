@@ -58,7 +58,7 @@ const HomeScreen = (props) => {
       return (
         <View style={{ marginBottom: 10 }}>
           <Image
-            style={{ width: 200, height: 200 }}
+            style={{ width: 200, height: 200, borderRadius: 10 }}
             source={{
               uri: imageUrl,
             }}
