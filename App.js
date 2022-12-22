@@ -1,9 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { Configuration, OpenAIApi } from "openai";
-import { useState } from "react";
-import MainNavigator from "./navigation/navigation";
-import { NavigationContainer } from "@react-navigation/native";
+import MainNavigator from "./navigation/Navigatior";
 import {
   MD3LightTheme as DefaultTheme,
   Provider as PaperProvider,
@@ -37,25 +35,23 @@ export default function App() {
     }
   };
   return (
-    <NavigationContainer>
-      <PaperProvider theme={theme}>
-        <View style={styles.container}>
-          <Text>{JSON.stringify(configuration)}</Text>
-          <Text>Hallo</Text>
-          <MainNavigator />
-          <Button title="create Image" onPress={generateImage} />
-          <StatusBar style="auto" />
-        </View>
-      </PaperProvider>
-    </NavigationContainer>
+    <PaperProvider theme={theme}>
+      <View style={styles.container}>
+        {/* <Text>{JSON.stringify(configuration)}</Text>
+        <Text>Hallo</Text> */}
+        <MainNavigator />
+        <StatusBar style="auto" />
+        {/* <Button title="create Image" onPress={generateImage} /> */}
+      </View>
+    </PaperProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    // backgroundColor: "#fff",
+    // alignItems: "center",
+    // justifyContent: "center",
   },
 });
