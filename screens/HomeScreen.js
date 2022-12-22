@@ -20,6 +20,7 @@ import { imageAdded } from "../store/images";
 import { persistor } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
+import layout from "../constants/layout";
 
 const HomeScreen = (props) => {
   const [loading, setLoading] = React.useState(false);
@@ -65,28 +66,36 @@ const HomeScreen = (props) => {
   };
 
   const activityIndicator = () => {
-    if (loading == true)
-      return <ActivityIndicator size="large" color="#00ff00" />;
+    if (loading) return <ActivityIndicator size="large" color="#00ff00" />;
   };
 
   return (
     <SafeAreaView style={styles.screen}>
-      {activityIndicator()}
       <View style={styles.screenContainer}>
+        <Text variant="titleMedium" style={{ paddingBottom: 10 }}>
+          Describe the Image you are thinking of.
+        </Text>
         <TextInput
-          style={{ marginBottom: 10 }}
+          label="Image description"
+          style={{
+            marginBottom: 10,
+            height: 60,
+            width: layout.window.width - 25,
+          }}
           onChangeText={onChangeText}
           value={text}
-          placeholder="Write your text describing the image here."
+          placeholder="A Monkey writing code."
         />
         <Button
           icon="camera"
           mode="contained"
+          disabled={loading}
           onPress={generateImage}
           style={{ marginBottom: 10 }}
         >
           Generate Image
         </Button>
+        {activityIndicator()}
         {renderImage()}
       </View>
       <ImageHistory />

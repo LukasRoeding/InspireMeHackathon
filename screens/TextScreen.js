@@ -13,22 +13,18 @@ const TextScreen = (props) => {
     apiKey: x,
   });
   const openai = new OpenAIApi(configuration);
-  const [questionText, setquestionText] = React.useState(
-    "What do you want?"
-  );
-  const [responseText, setResponseText] = React.useState(
-    ""
-  );
+  const [questionText, setquestionText] = React.useState("");
+  const [responseText, setResponseText] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
   const generateText = async () => {
     try {
       const res = await openai.createCompletion({
         model: "text-davinci-003",
         prompt: questionText,
-        max_tokens: 250,
+        max_tokens: 150,
         temperature: 0,
-      })
-      setResponseText(res.data.choices[0].text)
+      });
+      setResponseText(res.data.choices[0].text);
     } catch (error) {
       console.error(error);
     }
@@ -56,7 +52,6 @@ const TextScreen = (props) => {
       );
   };
 
-
   const renderImage = () => {
     if (imageUrl.length > 0)
       return (
@@ -71,7 +66,11 @@ const TextScreen = (props) => {
 
   return (
     <View style={styles.screen}>
-      <TextInput onChangeText={setquestionText} value={questionText} />
+      <TextInput
+        onChangeText={setquestionText}
+        value={questionText}
+        placeholder="What do you want?"
+      />
       <Button icon="camera" mode="contained" onPress={generateText}>
         Generate Text
       </Button>
